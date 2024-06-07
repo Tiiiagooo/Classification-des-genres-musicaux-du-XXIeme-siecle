@@ -15,8 +15,8 @@ Ce projet essaiera de ce limiter aux musiques du XXIème siècle
 [Classification-des-genres-musicaux-du-XXIeme-siecle](PROJET)  
 ├── [src/](./src/)   
 │   ├── [code/](./src/code/)  
-│   ├── [data/](./src/data)  
-│   └── [documentation/](./src/documentation)  
+│   ├── [data/](./src/data/)  
+│   └── [documentation/](./src/documentation/)  
 │   │   └── [Etat_de_lart] (./src/documentation/Etat_de_lart.pdf)  
 
 
