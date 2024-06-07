@@ -7,28 +7,20 @@
 
 ## Feuille de Route
 
-Dans l'objectif de gagner de l'expérience dans le monde de la DATA. Je souhaite réaliser un projet de classification de genre musicaux des musiques du XXIème siècle.
+L'objectif de ce projet Le but de ce projet est de développer un modèle capable d'identifier le genre musical à partir des paroles des chansons, qui jouent un rôle crucial, ainsi que d'autres éléments tels que le rythme, la tonalité, le tempo et d'autres caractéristiques musicales qui contribuent à définir le genre.
+Ce projet essaiera de ce limiter aux musiques du XXIème siècle
 
-1 Problématique : Comment définir un genre musical ?
+## Arborescence des dossiers
+
+''' Classification-des-genres-musicaux-du-XXIeme-siecle
+[Classification-des-genres-musicaux-du-XXIeme-siecle](PROJET)  
+├── [src/](./src/)   
+│   ├── [code/](./src/code/)  
+│   ├── [data/](./src/data)  
+│   └── [documentation/](./src/documentation)  
+│   │   └── [Etat_de_lart.pdf] (./src/documentation/Etat_de_lart.pdf)  
 
 
-### Etape :
-
-+ Ma classification s'effectuera en deux étapes. La première étape consistera en la conception d'un modèle qui analysera les paroles des chansons afin de déterminer leur genre musical. Ensuite, la seconde étape se concentrera sur le tempo et la musique pour identifier le genre.
-
-### Etat de l'art :
-
-### Corpus :
-
-### Data Analysis :
-
-### Les modèles :
-
-+ Modèle 1 :
-
-+ Modèle 2 :
-
-### Résultat et conclusion :
 
 
 
