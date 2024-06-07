@@ -17,7 +17,7 @@ Ce projet essaiera de ce limiter aux musiques du XXIème siècle
 │   ├── [code/](./src/code/)  
 │   ├── [data/](./src/data/)  
 │   └── [documentation/](./src/documentation/)  
-│   │   └── [Etat_de_lart] (./src/documentation/Etat_de_lart.pdf)  
+│   │   └── [Etat_de_lart] (./src/documentation/Etat_de_lart)  
 
 
 
