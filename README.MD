@@ -13,7 +13,7 @@ Ce projet essaiera de ce limiter aux musiques du XXIème siècle
 ## Arborescence des dossiers
 
 ''' Classification-des-genres-musicaux-du-XXIeme-siecle
-(PROJET)  
+[Classification-des-genres-musicaux-du-XXIeme-siecle] 
 ├── [src/](./src/)   
 │   ├── [code/](./src/code/)  
 │   ├── [data/](./src/data)  
