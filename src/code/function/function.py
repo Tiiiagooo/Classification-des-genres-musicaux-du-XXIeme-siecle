@@ -1,7 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import spotipy
-from spotipy.oauth2 import SpotifyClientCredentials
 
 def get_token(liste_txt_file):
     genius_token = None
