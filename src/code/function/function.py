@@ -9,7 +9,7 @@ def get_token(liste_txt_file):
     for file_path in liste_txt_file:
         with open(file_path, 'r') as file:
             content = file.read()
-            if 'genius' in file_path.lower():
+            if 'genius_client_access_token' in file_path.lower():
                 genius_token = content
             elif 'client_id' in file_path.lower():
                 spotify_id = content
@@ -20,7 +20,7 @@ def get_token(liste_txt_file):
     else:
         return genius_token, spotify_id, spotify_secret
     
-def get_lyrics_from_genius(song_title, artist_name):
+def get_lyrics_from_genius(song_title, artist_name,GENIUS_ACCESS_TOKEN ):
     headers = {'Authorization': f'Bearer {GENIUS_ACCESS_TOKEN}'}
     search_url = "https://api.genius.com/search"
     query = f"{song_title} {artist_name}"
