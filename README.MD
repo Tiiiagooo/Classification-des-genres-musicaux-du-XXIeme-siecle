@@ -14,12 +14,15 @@ Ce projet essaiera de ce limiter aux musiques du XXIème siècle
 
 [Classification-des-genres-musicaux-du-XXIeme-siecle](PROJET)  
 ├── [src/](./src/)   
+
 │   ├── [code/](./src/code/)  
 │   ├── [spoti.ipynb](./src/code/spoti.ipynb)  
 │   └── [function](./src/code/function/)  
-│   │   └── [function.py](./src/code/function/function.py)  
-│   ├── [data/](./src/data/)  
-│   └── [documentation/](./src/documentation/)  
+│   │   └── [function.py](./src/code/function/function.py) 
+
+│   └── [data/](./src/data/)  
+
+│   ├── [documentation/](./src/documentation/)  
 │   │   └── [Etat_de_lart.pdf](./src/documentation/Etat_de_lart.pdf)     
 
 
