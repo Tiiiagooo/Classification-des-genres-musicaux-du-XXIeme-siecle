@@ -17,7 +17,7 @@ Ce projet essaiera de ce limiter aux musiques du XXIème siècle
 
 │   ├── [code/](./src/code/)  
 │   ├── [spoti.ipynb](./src/code/spoti.ipynb)  
-│   └── [function](./src/code/function/)  
+│   ├── [function](./src/code/function/)  
 │   │   └── [function.py](./src/code/function/function.py) 
 
 │   └── [data/](./src/data/)  
