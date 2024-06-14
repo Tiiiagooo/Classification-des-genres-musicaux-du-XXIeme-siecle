@@ -4,6 +4,9 @@ data/
 # Ignorer les dossiers de checkpoints de Jupyter
 .ipynb_checkpoints/
 
+# Ignorer les .cache
+.cache/
+
 # Ignorer les dossiers de l'environnement virtuel
 venv/
 __pycache__/
