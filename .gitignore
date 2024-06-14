@@ -1,1 +1,13 @@
+# Ignorer les datas du dossier data
 data/
+
+# Ignorer les dossiers de checkpoints de Jupyter
+.ipynb_checkpoints/
+
+# Ignorer les dossiers de l'environnement virtuel
+venv/
+__pycache__/
+
+# Ignorer les fichiers spécifiques à l'IDE
+.vscode/
+.idea/
