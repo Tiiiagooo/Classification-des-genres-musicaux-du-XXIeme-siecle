@@ -1,4 +1,4 @@
-from function.utils import requests, BeautifulSoup
+from function.utils import requests
 
 def get_token(liste_txt_file):
     """
@@ -69,3 +69,4 @@ def get_lyrics_from_genius(song_title, artist_name,GENIUS_ACCESS_TOKEN ):
     else:
         return None
     
+
