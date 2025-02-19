@@ -6,14 +6,14 @@ def get_token(liste_txt_file):
     contenant les différents access token des différents API.  
     Et retourne les access token des API en type str.
 
-    Parameter : 
-    liste_txt_files (list) : Liste des fichiers d'un dossier.  
+    Parameter :
+    - liste_txt_files (list) : Liste des fichiers d'un dossier.  
 
     Return :
-    genius_token (str) : le contenu écrit dans le fichier portant le nom 'genius_client_access_token'
-    spotify_id (str) : le contenu écrit dans le fichier portant le nom 'spotify_client_id'
-    spotify_secret (str) : le contenu écrit dans le fichier portant le nom 'spotify_client_secret'
-    ValueError : Si un fichier ne contient pas les access token
+    - genius_token (str) : le contenu écrit dans le fichier portant le nom 'genius_client_access_token'
+    - spotify_id (str) : le contenu écrit dans le fichier portant le nom 'spotify_client_id'
+    - spotify_secret (str) : le contenu écrit dans le fichier portant le nom 'spotify_client_secret'
+    - ValueError : Si un fichier ne contient pas les access token
     """
     genius_token = None
     spotify_id = None
