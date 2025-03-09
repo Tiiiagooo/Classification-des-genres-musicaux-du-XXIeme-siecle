@@ -59,12 +59,15 @@ def get_lyrics_from_genius(song_title, artist_name,GENIUS_ACCESS_TOKEN ):
                 song_info = hit
                 break
     if song_info:
-        song_api_path = song_info['result']['api_path']
-        song_url = f"https://api.genius.com{song_api_path}"
-        song_response = requests.get(song_url, headers=headers)
-        song_json = song_response.json()
-        lyrics_path = song_json['response']['song']['path']
-        lyrics_url = f"https://genius.com{lyrics_path}"
+        if song_info['result']['url'].startswith("https://genius.com/"):
+            lyrics_url = song_info['result']['url']
+        else:
+            song_api_path = song_info['result']['api_path']
+            song_url = f"https://api.genius.com{song_api_path}"
+            song_response = requests.get(song_url, headers=headers)
+            song_json = song_response.json()
+            lyrics_path = song_json['response']['song']['path']
+            lyrics_url = f"https://genius.com{lyrics_path}"
         return lyrics_url
     else:
         return None
