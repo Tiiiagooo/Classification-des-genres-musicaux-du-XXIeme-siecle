@@ -1,4 +1,25 @@
 from function.utils import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+
+# Fonction de session robuste
+def requests_retry_session(retries=5, backoff_factor=0.3,
+                           status_forcelist=(500, 502, 504),
+                           session=None):
+    session = session or requests.Session()
+    retry = Retry(
+        total=retries,
+        read=retries,
+        connect=retries,
+        backoff_factor=backoff_factor,
+        allowed_methods=["GET"],
+        status_forcelist=status_forcelist,
+        raise_on_status=False,
+    )
+    adapter = HTTPAdapter(max_retries=retry)
+    session.mount('https://', adapter)
+    session.mount('http://', adapter)
+    return session
 
 def get_token(liste_txt_file):
     """
@@ -50,26 +71,39 @@ def get_lyrics_from_genius(song_title, artist_name,GENIUS_ACCESS_TOKEN ):
     headers = {'Authorization': f'Bearer {GENIUS_ACCESS_TOKEN}'}
     search_url = "https://api.genius.com/search"
     query = f"{song_title} {artist_name}"
-    response = requests.get(search_url, headers=headers, params={'q': query})
-    json_response = response.json()
+    
+    # Utilise la session robuste
+    session = requests_retry_session()
+    
+    try:
+        response = session.get(search_url, headers=headers, params={'q': query}, timeout=10)
+        json_response = response.json()
+    except Exception as e:
+        print(f"Erreur pendant la requête Genius : {e}")
+        return None
+
     song_info = None
     if json_response['response']['hits']:
         for hit in json_response['response']['hits']:
             if artist_name.lower() in hit['result']['primary_artist']['name'].lower():
                 song_info = hit
                 break
+
     if song_info:
         if song_info['result']['url'].startswith("https://genius.com/"):
             lyrics_url = song_info['result']['url']
         else:
-            song_api_path = song_info['result']['api_path']
-            song_url = f"https://api.genius.com{song_api_path}"
-            song_response = requests.get(song_url, headers=headers)
-            song_json = song_response.json()
-            lyrics_path = song_json['response']['song']['path']
-            lyrics_url = f"https://genius.com{lyrics_path}"
+            try:
+                song_api_path = song_info['result']['api_path']
+                song_url = f"https://api.genius.com{song_api_path}"
+                song_response = session.get(song_url, headers=headers, timeout=10)
+                song_json = song_response.json()
+                lyrics_path = song_json['response']['song']['path']
+                lyrics_url = f"https://genius.com{lyrics_path}"
+            except Exception as e:
+                print(f"Erreur pendant la récupération des paroles : {e}")
+                return None
         return lyrics_url
     else:
-        return None
-    
+        return None    
 
