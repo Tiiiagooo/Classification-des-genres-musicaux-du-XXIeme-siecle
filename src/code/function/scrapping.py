@@ -1,9 +1,16 @@
 from function.utils import BeautifulSoup, requests        
 
-def scrapping_find_lyrics(lyrics_url, headers):
+def scrapping_find_lyrics_on_genius(lyrics_url, headers):
     response = requests.get(lyrics_url, headers=headers)
     soup = BeautifulSoup(response.text, "html.parser")
     lyrics_div = soup.find_all("div", {"class": "Lyrics-sc-37019ee2-1 jRTEBZ"})
+    liste_parole = [div.get_text(separator="\n").strip() for div in lyrics_div]
+    return liste_parole
+
+def scrapping_find_lyrics_on_lyricsfind(lyrics_url, headers):
+    response = requests.get(lyrics_url, headers=headers)
+    soup = BeautifulSoup(response.text, "html.parser")
+    lyrics_div = soup.find_all("div", {"class": "MuiBox-root css-0"})
     liste_parole = [div.get_text(separator="\n").strip() for div in lyrics_div]
     return liste_parole
 
