@@ -119,12 +119,14 @@ def get_lyrics_from_genius(song_title, artist_name, GENIUS_ACCESS_TOKEN ):
 
         #Si la musique n'a pas été trouvé, on cherche les autres titres similaires            
         alternative_hits = json_responses[1].get('response', {}).get('hits', []) #json_responses[1] pour la 2ème méthode de la requete qui contient que le titre
+
         list_of_url = [
             hit['result']['url']
             for hit in alternative_hits
             if hit['result']['url'].startswith("https://genius.com/")
         ]
+        list_of_artiste = [hit['result']['primary_artist']['name'].lower() for hit in alternative_hits]
 
-    return list_of_url, "artiste_secondaire", alternative_hits['result']['primary_artist']['name'].lower() if list_of_url else None        
+    return list_of_url, "artiste_secondaire", list_of_artiste if list_of_url else None        
    
 

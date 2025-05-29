@@ -26,6 +26,7 @@ def update_dictionary(song_title, artist_name, GENIUS_ACCESS_TOKEN, dictionnaire
     Retour :
     - dictionnaire_sons (dict) : Dictionnaire mis à jour.
     """
+
     lyrics_url, type_artiste, artiste = get_lyrics_from_genius(song_title, artist_name, GENIUS_ACCESS_TOKEN)
 
     if isinstance(lyrics_url, str):
@@ -48,7 +49,7 @@ def update_dictionary(song_title, artist_name, GENIUS_ACCESS_TOKEN, dictionnaire
 
             song_entry[key_lyrics] = lyrics_of_song
             song_entry[key_type] = type_artiste
-            song_entry[secondary_artiste] = artiste
+            song_entry[secondary_artiste] = artiste[idx]
 
             # On arrête si les paroles mentionnent l'artiste
             if artist_name.lower() in lyrics_of_song.lower():
