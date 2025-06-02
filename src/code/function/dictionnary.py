@@ -27,29 +27,34 @@ def update_dictionary(song_title, artist_name, GENIUS_ACCESS_TOKEN, dictionnaire
     - dictionnaire_sons (dict) : Dictionnaire mis à jour.
     """
 
-    lyrics_url, type_artiste, artiste = get_lyrics_from_genius(song_title, artist_name, GENIUS_ACCESS_TOKEN)
+    lyrics_url, type_artiste, artiste, titre = get_lyrics_from_genius(song_title, artist_name, GENIUS_ACCESS_TOKEN)
 
     if isinstance(lyrics_url, str):
         # Cas : une seule URL retournée
         list_lyrics = scrapping_find_lyrics_on_genius(lyrics_url, headers)
         lyrics_of_song = "\n".join(list_lyrics)
         song_entry = dictionnaire_sons.setdefault(artist_name, {}).setdefault(song_title, {})
-        song_entry["lyrics"] = lyrics_of_song
+        song_entry["lyrics_primaire"] = lyrics_of_song
         song_entry["type_artiste"] = type_artiste
 
     elif isinstance(lyrics_url, list):
         # Cas : plusieurs URLs (résultats alternatifs)
-        for idx, url in enumerate(lyrics_url):
+        for idx, url in enumerate(lyrics_url[:5]):
+            if artiste[idx] == "genius":
+                continue
             list_lyrics = scrapping_find_lyrics_on_genius(url, headers)
             lyrics_of_song = "\n".join(list_lyrics)
             song_entry = dictionnaire_sons.setdefault(artist_name, {}).setdefault(song_title, {})
             key_lyrics = f"lyrics_{idx}"
             key_type = f"type_artiste_{idx}"
             secondary_artiste = f"artiste_{idx}"
-
-            song_entry[key_lyrics] = lyrics_of_song
+            title = f"title_{idx}"
+            song_entry["lyrics_primaire"] = None
+            song_entry["type_artiste"] = None
             song_entry[key_type] = type_artiste
             song_entry[secondary_artiste] = artiste[idx]
+            song_entry[title] = titre[idx]
+            song_entry[key_lyrics] = lyrics_of_song
 
             # On arrête si les paroles mentionnent l'artiste
             if artist_name.lower() in lyrics_of_song.lower():
@@ -58,7 +63,7 @@ def update_dictionary(song_title, artist_name, GENIUS_ACCESS_TOKEN, dictionnaire
     else:
         # Cas : aucune URL retournée
         song_entry = dictionnaire_sons.setdefault(artist_name, {}).setdefault(song_title, {})
-        song_entry["lyrics"] = None
+        song_entry["lyrics_primaire"] = None
         song_entry["type_artiste"] = None
 
     return dictionnaire_sons

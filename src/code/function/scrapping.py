@@ -4,7 +4,21 @@ def scrapping_find_lyrics_on_genius(lyrics_url, headers):
     response = requests.get(lyrics_url, headers=headers)
     soup = BeautifulSoup(response.text, "html.parser")
     lyrics_div = soup.find_all("div", {"class": "Lyrics-sc-37019ee2-1 jRTEBZ"})
-    liste_parole = [div.get_text(separator="\n").strip() for div in lyrics_div]
+    if not lyrics_div:
+        lyrics_div = soup.find_all("div", {"class": "Lyrics__Container-sc-3d1d18a3-1 bjajog"})
+    else:
+        print("Parole pas dans la bonne div")
+        return []
+
+    liste_parole = []
+    for div in lyrics_div:
+        header = div.find("div", class_="LyricsHeader__Container-sc-d6abeb2b-1")
+        if header:
+            header.decompose()  # Supprime le bloc d'en-tête
+
+        texte = div.get_text(separator="\n").strip()
+        if texte:
+            liste_parole.append(texte)
     return liste_parole
 
 def scrapping_find_lyrics_on_lyricsfind(lyrics_url, headers):
