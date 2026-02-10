@@ -44,9 +44,6 @@ def get_token(liste_txt_file):
     - spotify_secret (str) : le contenu écrit dans le fichier portant le nom 'spotify_client_secret'
     - ValueError : Si un fichier ne contient pas les access token
     """
-    genius_token = None
-    spotify_id = None
-    spotify_secret = None
 
     for file_path in liste_txt_file:
         with open(file_path, 'r') as file:
@@ -58,7 +55,7 @@ def get_token(liste_txt_file):
             elif 'spotify_client_secret' in file_path.lower():
                 spotify_secret = content
     if None in (genius_token, spotify_id, spotify_secret):
-        raise ValueError("Certaines variables n'ont pas été correctement assignées. Vérifiez les fichiers dans le répertoire.")
+        raise ValueError("Certain token ne sont pas valide ou n'ont pas été correctement assignées. Vérifiez les fichiers dans le répertoire.")
     else:
         return genius_token, spotify_id, spotify_secret
     
