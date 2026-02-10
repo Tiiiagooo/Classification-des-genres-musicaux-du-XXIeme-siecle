@@ -130,3 +130,54 @@ def get_lyrics_from_genius(song_title, artist_name, GENIUS_ACCESS_TOKEN ):
     return list_of_url, "artiste_secondaire", list_of_artiste, list_of_title if list_of_url else None       
    
 
+def get_lyrics_from_genius_score(song_title, artist_name, token):
+    headers = {'Authorization': f'Bearer {token}'}
+    search_url = "https://api.genius.com/search"
+    session = requests_retry_session()
+
+    response = session.get(
+        search_url,
+        headers=headers,
+        params={'q': f"{song_title} {artist_name}"},
+        timeout=10
+    ).json()
+
+    hits = response.get("response", {}).get("hits", [])
+
+    candidates = []
+
+    for hit in hits:
+        result = hit["result"]
+        song_id = result["id"]
+
+        song_data = session.get(
+            f"https://api.genius.com/songs/{song_id}",
+            headers=headers,
+            timeout=10
+        ).json()["response"]["song"]
+
+        score = 0
+        primary = song_data["primary_artist"]["name"].lower()
+        featured = [name_feature["name"].lower() for name_feature in song_data["featured_artists"]]
+
+        if artist_name.lower() in primary:
+            score += 3
+        if artist_name.lower() in featured:
+            score += 2
+        if song_title.lower() in song_data["title"].lower():
+            score += 2
+
+        candidates.append({
+            "score": score,
+            "url": f"https://genius.com{song_data['path']}",
+            "title": song_data["title"],
+            "primary_artist": primary,
+            "featured_artists": featured
+        })
+
+    if not candidates:
+        return None
+
+    best = max(candidates, key=lambda x: x["score"])
+
+    return best
