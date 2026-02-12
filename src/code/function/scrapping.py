@@ -1,20 +1,26 @@
 from function.utils import BeautifulSoup, requests        
+import cloudscraper
+
 
 def scrapping_find_lyrics_on_genius(lyrics_url, headers):
-    response = requests.get(lyrics_url, headers=headers)
+    # Création du scraper avec user agent Firefox
+    scraper = cloudscraper.create_scraper(headers)
+    response = scraper.get(lyrics_url)
     soup = BeautifulSoup(response.text, "html.parser")
-    lyrics_div = soup.find_all("div", {"class": "Lyrics-sc-37019ee2-1 jRTEBZ"})
-    if not lyrics_div:
-        lyrics_div = soup.find_all("div", {"class": "Lyrics__Container-sc-3d1d18a3-1 bjajog"})
-    else:
-        print("Parole pas dans la bonne div")
+    lyrics_divs = soup.find_all("div", {"data-lyrics-container": "true"})
+
+    if not lyrics_divs:
         return []
 
     liste_parole = []
-    for div in lyrics_div:
-        header = div.find("div", class_="LyricsHeader__Container-sc-d6abeb2b-1")
+
+    for div in lyrics_divs:
+
+        header = soup.find_all("div", {"data-exclude-from-selection": "true"})
         if header:
-            header.decompose()  # Supprime le bloc d'en-tête
+            header.decompose() # Supprime le bloc d'en-tête
+        for br in div.find_all("br"):
+            br.replace_with("\n")
 
         texte = div.get_text(separator="\n").strip()
         if texte:

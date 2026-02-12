@@ -145,7 +145,6 @@ def get_lyrics_from_genius_score(song_title, artist_name, token):
     hits = response.get("response", {}).get("hits", [])
 
     candidates = []
-
     for hit in hits:
         result = hit["result"]
         song_id = result["id"]
