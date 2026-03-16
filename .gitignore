@@ -14,3 +14,7 @@ __pycache__/
 # Ignorer les fichiers spécifiques à l'IDE
 .vscode/
 .idea/
+
+
+# Ignorer le miniconda
+Miniconda3-latest-Linux-x86_64.sh
