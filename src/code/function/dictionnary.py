@@ -65,7 +65,6 @@ def update_dictionary2(song_title, artist_name, GENIUS_ACCESS_TOKEN, dictionnair
     # Initialisation de la chanson si absente
     if song_title not in dictionnaire_sons[artist_name]:
         dictionnaire_sons[artist_name][song_title] = {
-            "lyrics_primaire": None,
             "prompt": f"Artiste: {artist_name}\nTitre: {song_title}\nGenre:",
             "completion": None
         }
@@ -75,7 +74,6 @@ def update_dictionary2(song_title, artist_name, GENIUS_ACCESS_TOKEN, dictionnair
             list_lyrics = scrapping_find_lyrics_on_genius(result["url"], headers)
             lyrics_of_song = "\n".join(list_lyrics)
 
-            dictionnaire_sons[artist_name][song_title]["lyrics_primaire"] = lyrics_of_song
             dictionnaire_sons[artist_name][song_title]["completion"] = lyrics_of_song
 
         except Exception as e:
@@ -83,7 +81,6 @@ def update_dictionary2(song_title, artist_name, GENIUS_ACCESS_TOKEN, dictionnair
 
     else:
         # Pas de résultat → on laisse None
-        dictionnaire_sons[artist_name][song_title]["lyrics_primaire"] = None
         dictionnaire_sons[artist_name][song_title]["completion"] = None
 
     return dictionnaire_sons
