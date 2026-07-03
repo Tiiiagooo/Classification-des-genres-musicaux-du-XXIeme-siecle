@@ -1,6 +1,9 @@
 # Ignorer les datas du dossier data
 data/
 
+#Ignorer modele
+modele/
+
 # Ignorer les dossiers de checkpoints de Jupyter
 .ipynb_checkpoints/
 
