@@ -18,6 +18,8 @@ __pycache__/
 .vscode/
 .idea/
 
+# ngrok
+ngrok.exe
 
 # Ignorer le miniconda
 Miniconda3-latest-Linux-x86_64.sh
