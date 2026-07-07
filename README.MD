@@ -104,7 +104,7 @@ jupyter notebook src/code/spoti.ipynb
 - [x] Pipeline de nettoyage et tokenisation des paroles
 - [x] Fine-tuning GPT-2 sur corpus par genre
 - [x] Fine-tuning Mistral avec LoRA/QLoRA
-- [ ] Système de détection artiste + scraping automatique à la volée
+- [x] Système de détection artiste + scraping automatique à la volée
 - [ ] Module de reclassification collaborative des sous-genres
 - [ ] Interface Streamlit complète
 - [ ] Déploiement cloud (AWS / GCP)
